@@ -31,6 +31,8 @@ dependencies:
   provider: ^4.3.2+2
   mvc_pattern: ^3.4.1
   omdb_dart: ^0.0.2
+  tmdb_dart: ^0.1.1
+
 
 
 

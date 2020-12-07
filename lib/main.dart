@@ -65,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //   );
     // }
     return Scaffold(
+      resizeToAvoidBottomPadding:false,
       appBar: AppBar(
         actions: [
           Expanded(
@@ -114,11 +115,12 @@ class _MyHomePageState extends State<MyHomePage> {
                             SizedBox(
                               width:MediaQuery.of(context).size.width,
                               child: ListTile(
-                                leading: new Text("$key"),
-                                trailing: new Text("${list1[key]??key}"),
+                                  leading:  Text("$key"),
+                                  subtitle:  Text("${list1[key]??key}",softWrap: true,overflow: TextOverflow.fade,maxLines: 3,),
+                                  isThreeLine: true,
+                                ),
                               ),
-                            ),
-                            new Divider(
+                            Divider(
                               height: key=="plot"?10.0:2.0,
                             ),
                           ],

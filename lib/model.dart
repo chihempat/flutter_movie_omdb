@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:omdb_dart/omdb_dart.dart';
+import 'package:tmdb_dart/tmdb_dart.dart';
+
 
 
 class MovieModel extends ChangeNotifier{
@@ -74,7 +76,7 @@ class MovieModel extends ChangeNotifier{
 
    Future<void> getMovie(String value) async {
      _isLoading=true;
-    Omdb client = new Omdb("8d0e4274", value);
+    Omdb client =  Omdb("8d0e4274", value);
     await client.getMovie();
     _title = client.movie.title;
     _released = client.movie.released;
