@@ -68,28 +68,47 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       resizeToAvoidBottomPadding:false,
       appBar: AppBar(
-        actions: [
-          SizedBox(
-            width: w/2,
-            child: TextField(
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(labelText: "Title",),
-            onChanged: (value){
-              setState(() {
-                  context.read<MovieModel>().getMovie(value);
-                  movietitle=value;
-                  print(value);
-                  }
-                );
-              },
-            ),
-          ),
-        ],
+        // leading:Text("Movie Search",style: TextStyle(fontSize: w/40),),
+        // leadingWidth: w/3,
+        elevation: 10,
+        titleSpacing: w/3,
+        title: TextField(
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(labelText: "Title",),
+          onChanged: (value){
+            setState(() {
+              context.read<MovieModel>().getMovie(value);
+              movietitle=value;
+              print(value);
+            }
+            );
+          },
+        ),
+        // actions: [
+        //   Center(
+        //     child: SizedBox(
+        //       width: w/2,
+        //       child: TextField(
+        //         textAlign: TextAlign.center,
+        //         decoration: InputDecoration(labelText: "Title",),
+        //       onChanged: (value){
+        //         setState(() {
+        //             context.read<MovieModel>().getMovie(value);
+        //             movietitle=value;
+        //             print(value);
+        //             }
+        //           );
+        //         },
+        //       ),
+        //     ),
+        //   ),
+        // ],
       ),
       body:
           SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+
               children: [
                 isl?
                   Padding(
@@ -101,19 +120,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     value: context.watch<MovieModel>().progress,
                   ),),
                 ):
-                Image.network(context.watch<MovieModel>().poster??"new",
-                width: w/3,
-                errorBuilder: (BuildContext context, Object exception, StackTrace stackTrace) {
-                   // Appropriate logging or analytics, e.g.
-                   // myAnalytics.recordError(
-                   //   'An error occurred loading "https://example.does.not.exist/image.jpg"',
-                   //   exception,
-                   //   stackTrace,
-                   // );
-                    return Text('Holder Image');
-                  },
-                 ),
-
+                Padding(
+                  padding: const EdgeInsets.all(0.0),
+                  child: Image.network(context.watch<MovieModel>().poster??"new",
+                  width: w*(1/7)+100,
+                  errorBuilder: (BuildContext context, Object exception, StackTrace stackTrace) {
+                      return Text('Holder Image');
+                    },
+                   ),
+                ),
                 SizedBox(
                   height: 1000,
                   width: MediaQuery.of(context).size.width,
@@ -139,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ),
                             Divider(
-                              height: key=="plot"?10.0:2.0,
+                              height: 2.0,
                             ),
                           ],
                         );
