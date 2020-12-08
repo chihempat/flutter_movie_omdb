@@ -1,6 +1,6 @@
-# flutter_app6
+# OMDB Movie
 
-A new Flutter application.
+Flutter Movie Catlog app using OMDB API
 
 ## Getting Started
 
