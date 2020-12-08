@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     String movietitle=context.watch<MovieModel>().title;
     Map<dynamic,dynamic> list1=context.watch<MovieModel>().movieList??{"title1":"Movie"};
     bool isl=context.watch<MovieModel>().isLoading;
+    double w=MediaQuery.of(context).size.width;
 
     // void startTimer() {
     //   new Timer.periodic(
@@ -68,10 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
       resizeToAvoidBottomPadding:false,
       appBar: AppBar(
         actions: [
-          Expanded(
+          SizedBox(
+            width: w/2,
             child: TextField(
               textAlign: TextAlign.center,
-              decoration: InputDecoration(labelText: "title",),
+              decoration: InputDecoration(labelText: "Title",),
             onChanged: (value){
               setState(() {
                   context.read<MovieModel>().getMovie(value);
@@ -100,7 +102,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),),
                 ):
                 Image.network(context.watch<MovieModel>().poster??"new",
-                height: 200),
+                width: w/3,
+                errorBuilder: (BuildContext context, Object exception, StackTrace stackTrace) {
+                   // Appropriate logging or analytics, e.g.
+                   // myAnalytics.recordError(
+                   //   'An error occurred loading "https://example.does.not.exist/image.jpg"',
+                   //   exception,
+                   //   stackTrace,
+                   // );
+                    return Text('Holder Image');
+                  },
+                 ),
+
                 SizedBox(
                   height: 1000,
                   width: MediaQuery.of(context).size.width,
@@ -115,9 +128,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             SizedBox(
                               width:MediaQuery.of(context).size.width,
                               child: ListTile(
-                                  leading:  Text("$key"),
-                                  subtitle:  Text("${list1[key]??key}",softWrap: true,overflow: TextOverflow.fade,maxLines: 3,),
-                                  isThreeLine: true,
+                              minLeadingWidth:100,
+                                  leading:  Text("$key".replaceFirst(key[0], key[0].toUpperCase(),),
+                                    style: TextStyle(color: Colors.grey),),
+                                  title:  Text("${list1[key]??key}",
+                                    softWrap: true,
+                                    overflow: TextOverflow.fade,
+                                  textAlign: TextAlign.left,),
+
                                 ),
                               ),
                             Divider(
